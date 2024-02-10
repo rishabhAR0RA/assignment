@@ -1,3 +1,21 @@
+## Showcase
+
+Register Page: 
+
+![register](https://github.com/rishabhAR0RA/assignment/assets/103426330/af42f4d1-cc16-4380-822a-062f16cb79b4)
+
+Login Page:
+
+![login](https://github.com/rishabhAR0RA/assignment/assets/103426330/33f491cb-9d85-4a08-8e6e-275b2d50bf9c)
+
+Profile Page:
+
+![profile](https://github.com/rishabhAR0RA/assignment/assets/103426330/425b3ee5-98a8-4ba4-a100-688be8a0b473)
+
+Update Page:
+
+![update](https://github.com/rishabhAR0RA/assignment/assets/103426330/9614593e-373f-4d98-b42b-1de0c81a87c6)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
