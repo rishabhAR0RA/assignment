@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -11,6 +12,7 @@ import { updateValidation } from "@/lib/schemaValidation/user";
 
 const UpdateForm = ({ user }) => {
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm({
         resolver: zodResolver(updateValidation),
@@ -25,22 +27,20 @@ const UpdateForm = ({ user }) => {
 
     async function onSubmit(values) {
         try {
-
+            setIsLoading(true);
             const res = await axios.post("/api/update", values);
 
             const userId = res.data.user.id;
 
             if (res.status === 201) {
-                router.refresh();
                 router.push(`/profile/${userId}`);
             }
+            setIsLoading(false);
 
         } catch (error) {
             console.log(error);
         }
     }
-
-    const isLoading = form.formState.isLoading;
 
     return (
         <Form {...form}>
@@ -117,7 +117,7 @@ const UpdateForm = ({ user }) => {
 
                 <div className="pt-2">
                     <Button className="w-full" type="submit" disabled={isLoading}>
-                        Update
+                        {isLoading ? <span>Updating...</span> : <span>Update</span>}
                     </Button>
                 </div>
             </form>

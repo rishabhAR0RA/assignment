@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -12,6 +13,7 @@ import { loginValidation } from "@/lib/schemaValidation/user";
 
 const LoginForm = () => {
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm({
         resolver: zodResolver(loginValidation),
@@ -23,6 +25,7 @@ const LoginForm = () => {
 
     async function onSubmit(values) {
         try {
+            setIsLoading(true);
             const res = await axios.post("/api/login", values);
 
             const user = res.data.user;
@@ -31,6 +34,7 @@ const LoginForm = () => {
                 router.refresh();
                 router.push(`/profile/${user.id}`);
             }
+            setIsLoading(false);
 
         } catch (error) {
             if (error.response.status === 401) {
@@ -40,8 +44,6 @@ const LoginForm = () => {
             }
         }
     }
-
-    const isLoading = form.formState.isLoading;
 
     return (
         <Form {...form}>
@@ -74,7 +76,7 @@ const LoginForm = () => {
                 />
                 <div className="pt-2">
                     <Button className="w-full" type="submit" disabled={isLoading}>
-                        Login
+                        {isLoading ? <span>Logging in...</span> : <span>Log in</span>}
                     </Button>
                 </div>
                 <span className="text-center">
