@@ -24,7 +24,7 @@ const Page = async ({ params }) => {
         );
     }
 
-    user.dob = user.dob.toLocaleDateString();
+    user.dob = user.dob ? user.dob.toLocaleDateString() : "";
 
     return (
         <div className="bg-gray-100 min-h-screen py-8 px-4">
